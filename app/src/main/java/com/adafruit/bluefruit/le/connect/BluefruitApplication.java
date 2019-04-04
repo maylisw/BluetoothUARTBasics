@@ -35,15 +35,6 @@ public class BluefruitApplication extends Application {
 
     // endregion
 
-/*
-    private void handleUncaughtException(Thread thread, Throwable e) {
-        Log.e(TAG, "Error: handleUncaughtException");
-        e.printStackTrace();
-        BleScanner.getInstance().disconnectFromAll();
-
-        System.exit(1);
-    }*/
-
 
     // region Detect app in background: https://stackoverflow.com/questions/3667022/checking-if-an-android-application-is-running-in-the-background
 

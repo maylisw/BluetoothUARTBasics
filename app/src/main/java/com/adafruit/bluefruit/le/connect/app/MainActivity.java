@@ -32,7 +32,7 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.security.ProviderInstaller;
 
-public class MainActivity extends AppCompatActivity implements ScannerFragment.ScannerFragmentListener, PeripheralModulesFragment.PeripheralModulesFragmentListener {
+public class MainActivity extends AppCompatActivity implements ScannerFragment.ScannerFragmentListener {
 
     // Constants
     private final static String TAG = MainActivity.class.getSimpleName();
@@ -313,27 +313,12 @@ public class MainActivity extends AppCompatActivity implements ScannerFragment.S
     }
 
     public void startPeripheralModules(String peripheralIdentifier) {
-        PeripheralModulesFragment fragment =PeripheralModulesFragment.newInstance(peripheralIdentifier);
+        UartModeFragment fragment = UartModeFragment.newInstance(peripheralIdentifier);
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager != null) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
                     .replace(R.id.contentLayout, fragment, "Modules");
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-        }
-    }
-
-    // endregion
-
-    // region PeripheralModulesFragmentListener
-    @Override
-    public void startModuleFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        if (fragmentManager != null) {
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-                    .replace(R.id.contentLayout, fragment, "Module");
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }

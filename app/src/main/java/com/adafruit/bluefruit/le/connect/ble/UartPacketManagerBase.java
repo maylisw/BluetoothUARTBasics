@@ -81,21 +81,6 @@ public class UartPacketManagerBase implements BlePeripheralUart.UartRxHandler {
         return mPackets;
     }
 
-    /*
-    public void setEnabled(@NonNull Context context, boolean enabled) {
-        if (enabled != mIsEnabled) {
-            mIsEnabled = enabled;
-
-            if (enabled) {
-                registerGattReceiver(context);
-            } else {
-                unregisterGattReceiver(context);
-            }
-        }
-    }
-    */
-    // endregion
-
     // region Counters
     public void resetCounters() {
         mReceivedBytes = 0;
@@ -111,37 +96,4 @@ public class UartPacketManagerBase implements BlePeripheralUart.UartRxHandler {
     }
 
     // endregion
-
-    /*
-    // region Broadcast Listener
-    private void registerGattReceiver(@NonNull Context context) {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(BlePeripheral.kBlePeripheral_OnConnected);
-        filter.addAction(BlePeripheral.kBlePeripheral_OnDisconnected);
-        LocalBroadcastManager.getInstance(context).registerReceiver(mGattUpdateReceiver, filter);
-    }
-
-    private void unregisterGattReceiver(@NonNull Context context) {
-        LocalBroadcastManager.getInstance(context).unregisterReceiver(mGattUpdateReceiver);
-    }
-
-    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            final String identifier = intent.getStringExtra(BlePeripheral.kExtra_deviceAddress);
-            if (identifier != null) {
-                if (BlePeripheral.kBlePeripheral_OnConnected.equals(action)) {
-                    clearPacketsCache();
-                } else if (BlePeripheral.kBlePeripheral_OnDisconnected.equals(action)) {
-                    clearPacketsCache();
-                    mPacketsSemaphore.release();     // Force signal if was waiting
-                }
-            } else {
-                Log.w(TAG, "UartPacketManagerBase mGattUpdateReceiver with null peripheral");
-            }
-        }
-    };
-    // endregion
-    */
 }

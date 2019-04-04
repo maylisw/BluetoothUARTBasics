@@ -19,12 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.adafruit.bluefruit.le.connect.BluefruitApplication;
-import com.adafruit.bluefruit.le.connect.BuildConfig;
 import com.adafruit.bluefruit.le.connect.R;
-import com.adafruit.bluefruit.le.connect.models.PeripheralModeViewModel;
-import com.adafruit.bluefruit.le.connect.utils.DialogUtils;
-import com.squareup.leakcanary.RefWatcher;
 
 import java.lang.ref.WeakReference;
 
@@ -38,7 +33,7 @@ public class MainFragment extends Fragment {
     // Data
     private WeakReference<Fragment> mCurrentFragmentReference;
     private int selectedFragmentId = 0;
-    private PeripheralModeViewModel mPeripheralModeViewModel;
+    //private PeripheralModeViewModel mPeripheralModeViewModel;
     private boolean mIsInitialNavigationItemSelected = false;
 
     // region Fragment Lifecycle
@@ -81,7 +76,6 @@ public class MainFragment extends Fragment {
         FragmentActivity activity = getActivity();
         if (activity != null) {
             // ViewModels
-            mPeripheralModeViewModel = ViewModelProviders.of(activity).get(PeripheralModeViewModel.class);   // Note: shares viewModel with Activity
 
             // update options menu with current values
             activity.invalidateOptionsMenu();
