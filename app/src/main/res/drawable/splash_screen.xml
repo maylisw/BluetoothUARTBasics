@@ -9,8 +9,7 @@
         android:right="20dp">
 
         <bitmap
-
             android:gravity="center"
-            android:src="@drawable/kiwi_logo_temp" />
+            android:src="@drawable/kiwi_heart" />
     </item>
 </layer-list>

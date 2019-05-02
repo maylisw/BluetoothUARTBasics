@@ -63,11 +63,12 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Setup bottom navigation view
-        mNavigationView = view.findViewById(R.id.navigation);
-        mNavigationView.setOnNavigationItemSelectedListener(this::selectFragment);
-        updateActionBarTitle(mNavigationView.getSelectedItemId());       // Restore title (i.e. when a fragment is popped)
-    }
+        Fragment selectedFragment = ScannerFragment.newInstance();
+        FragmentManager fragmentManager = getChildFragmentManager();
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        transaction.replace(R.id.navigationContentLayout, selectedFragment).commit(); }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -79,13 +80,7 @@ public class MainFragment extends Fragment {
 
             // update options menu with current values
             activity.invalidateOptionsMenu();
-
-            // Setup when activity is created for the first time
-            if (!mIsInitialNavigationItemSelected) {
-                // Set initial value
-                mNavigationView.setSelectedItemId(R.id.navigation_central);
-                mIsInitialNavigationItemSelected = true;
-            }
+            setActionBarTitle("Kiwi Hydration");
         }
     }
 
@@ -96,44 +91,6 @@ public class MainFragment extends Fragment {
         return mCurrentFragmentReference == null ? null : mCurrentFragmentReference.get();
     }
 
-    private boolean selectFragment(@NonNull MenuItem item) {
-
-        final int navigationSelectedItem = item.getItemId();
-
-        // Change fragment if different
-        boolean isFragmentChanged = false;
-        if (navigationSelectedItem != selectedFragmentId) {
-            Fragment selectedFragment = null;
-            selectedFragment = ScannerFragment.newInstance();
-
-
-            if (selectedFragment != null) {
-                updateActionBarTitle(navigationSelectedItem);
-
-                FragmentManager fragmentManager = getChildFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.navigationContentLayout, selectedFragment)
-                        .commit();
-
-                mCurrentFragmentReference = new WeakReference<>(selectedFragment);
-                selectedFragmentId = navigationSelectedItem;
-                isFragmentChanged = true;
-            }
-        }
-
-
-        return isFragmentChanged;
-    }
-
-    private void updateActionBarTitle(int navigationSelectedItem) {
-        int titleId = 0;
-        switch (navigationSelectedItem) {
-            case R.id.navigation_central:
-                titleId = R.string.main_tabbar_centralmode;
-                break;
-        }
-        setActionBarTitle(getString(titleId));
-    }
 
     private void setActionBarTitle(String title) {
         AppCompatActivity activity = ((AppCompatActivity) getActivity());

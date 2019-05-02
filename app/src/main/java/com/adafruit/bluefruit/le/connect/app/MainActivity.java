@@ -14,23 +14,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.adafruit.bluefruit.le.connect.BluefruitApplication;
+import com.adafruit.bluefruit.le.connect.KiwiHydration;
 import com.adafruit.bluefruit.le.connect.R;
 import com.adafruit.bluefruit.le.connect.ble.BleUtils;
 import com.adafruit.bluefruit.le.connect.ble.central.BleManager;
 import com.adafruit.bluefruit.le.connect.ble.central.BlePeripheral;
 import com.adafruit.bluefruit.le.connect.utils.DialogUtils;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.security.ProviderInstaller;
 
 public class MainActivity extends AppCompatActivity implements ScannerFragment.ScannerFragmentListener {
 
@@ -85,25 +80,13 @@ public class MainActivity extends AppCompatActivity implements ScannerFragment.S
         savedInstanceState.putBoolean("hasUserAlreadyBeenAskedAboutBluetoothStatus", hasUserAlreadyBeenAskedAboutBluetoothStatus);
     }
 
-    private void updateAndroidSecurityProvider(Activity callingActivity) {
-        try {
-            ProviderInstaller.installIfNeeded(this);
-        } catch (GooglePlayServicesRepairableException e) {
-            // Thrown when Google Play Services is not installed, up-to-date, or enabled
-            // Show dialog to allow users to install, update, or otherwise enable Google Play services.
-            GooglePlayServicesUtil.getErrorDialog(e.getConnectionStatusCode(), callingActivity, 0);
-        } catch (GooglePlayServicesNotAvailableException e) {
-            Log.e("SecurityException", "Google Play Services not available.");
-        }
-    }
-
     // endregion
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        BluefruitApplication.activityResumed();
+        KiwiHydration.activityResumed();
         checkPermissions();
 
         // Observe disconnections
@@ -120,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements ScannerFragment.S
     @Override
     protected void onPause() {
         super.onPause();
-        BluefruitApplication.activityPaused();
+        KiwiHydration.activityPaused();
         unregisterGattReceiver();
 
         // Remove location dialog if present
@@ -312,8 +295,9 @@ public class MainActivity extends AppCompatActivity implements ScannerFragment.S
         requestCoarseLocationPermissionIfNeeded();
     }
 
+    //automatically goes into uart
     public void startPeripheralModules(String peripheralIdentifier) {
-        UartModeFragment fragment = UartModeFragment.newInstance(peripheralIdentifier);
+        TestFragment fragment =  TestFragment.newInstance(peripheralIdentifier);
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager != null) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()

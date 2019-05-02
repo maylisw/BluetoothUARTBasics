@@ -62,11 +62,7 @@ public class UartPacketManager extends UartPacketManagerBase {
             mMainHandler.post(() -> listener.onUartPacket(uartPacket));
         }
 
-        final boolean shouldBeSent = !wasReceivedFromMqtt;
-
-        if (shouldBeSent) {
-            send(uartPeripheral, data, null);
-        }
+        send(uartPeripheral, data,null);
     }
 
     // endregion

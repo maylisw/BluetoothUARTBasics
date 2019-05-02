@@ -7,21 +7,9 @@
     android:orientation="vertical"
     tools:context=".app.MainFragment">
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:background="@color/bars_background"
-        app:itemIconTint="@color/main_bottomnavigationbar"
-        app:itemTextColor="@color/main_bottomnavigationbar"
-        app:menu="@menu/navigation" />
-
     <FrameLayout
         android:id="@+id/navigationContentLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/navigation"/>
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

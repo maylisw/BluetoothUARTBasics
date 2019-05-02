@@ -61,7 +61,9 @@ public class BlePeripheralUart {
                 UartRxHandler handler = weakUartRxHandler.get();
                 if (handler != null) {
                     byte[] data = mUartRxCharacteristic.getValue();
+                    Log.d(TAG, "uartEnable: "+data.toString());
                     handler.onRxDataReceived(data, identifier, status);
+                    Log.d(TAG, "uartEnable: "+status);
                 }
             };
 

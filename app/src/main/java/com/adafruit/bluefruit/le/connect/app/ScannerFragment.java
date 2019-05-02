@@ -187,6 +187,7 @@ public class ScannerFragment extends Fragment implements ScannerStatusFragmentDi
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        TestFragment t = new TestFragment();
 
         // ViewModel
         FragmentActivity activity = getActivity();
