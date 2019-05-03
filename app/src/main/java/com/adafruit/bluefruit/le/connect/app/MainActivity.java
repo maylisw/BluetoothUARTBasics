@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity implements ScannerFragment.S
     // Constants
     private final static String TAG = MainActivity.class.getSimpleName();
 
-    // Config
-    private final static boolean kAvoidPoppingFragmentsWhileOnDfu = false;
-
     // Permission requests
     private final static int PERMISSION_REQUEST_COARSE_LOCATION = 1;
     public final static int PERMISSION_REQUEST_FINE_LOCATION = 2;

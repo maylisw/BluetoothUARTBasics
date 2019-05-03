@@ -10,6 +10,6 @@
 
         <bitmap
             android:gravity="center"
-            android:src="@drawable/kiwi_heart" />
+            android:src="@drawable/logoish" />
     </item>
 </layer-list>

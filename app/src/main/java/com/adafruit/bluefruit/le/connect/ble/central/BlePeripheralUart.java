@@ -46,6 +46,7 @@ public class BlePeripheralUart {
 
     public void uartEnable(@Nullable UartRxHandler uartRxHandler, @Nullable BlePeripheral.CompletionHandler completionHandler) {
 
+
         // Get uart communications characteristic
         mUartTxCharacteristic = mBlePeripheral.getCharacteristic(kUartTxCharacteristicUUID, kUartServiceUUID);
         mUartRxCharacteristic = mBlePeripheral.getCharacteristic(kUartRxCharacteristicUUID, kUartServiceUUID);
@@ -63,7 +64,6 @@ public class BlePeripheralUart {
                     byte[] data = mUartRxCharacteristic.getValue();
                     Log.d(TAG, "uartEnable: "+data.toString());
                     handler.onRxDataReceived(data, identifier, status);
-                    Log.d(TAG, "uartEnable: "+status);
                 }
             };
 

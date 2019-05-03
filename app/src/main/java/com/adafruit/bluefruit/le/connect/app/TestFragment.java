@@ -52,7 +52,6 @@ public class TestFragment extends Fragment {
 
     private void wireWidgets() {
         context = getActivity();
-        //UartModeFragment fragment = UartModeFragment.newInstance(peripheralIdentifier);
         FragmentManager fragmentManager = getFragmentManager();
         calibrate = rootview.findViewById(R.id.calibration);
         calibrate.setText(R.string.calibrateButtonText);

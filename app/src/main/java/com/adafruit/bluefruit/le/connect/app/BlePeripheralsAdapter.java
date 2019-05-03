@@ -148,7 +148,7 @@ class BlePeripheralsAdapter extends RecyclerView.Adapter<BlePeripheralsAdapter.V
         TextView nameTextView;
         ImageView rssiImageView;
         Button connectButton;
-        TextView dataTextView;
+        //TextView dataTextView;
         String deviceAddress;
 
         ViewHolder(View view) {
@@ -158,7 +158,7 @@ class BlePeripheralsAdapter extends RecyclerView.Adapter<BlePeripheralsAdapter.V
             rssiImageView = view.findViewById(R.id.rssiImageView);
             connectButton = view.findViewById(R.id.connectButton);
             deviceAddress = null;
-            dataTextView = view.findViewById(R.id.dataTextView);
+            //dataTextView = view.findViewById(R.id.dataTextView);
         }
     }
     // endregion
